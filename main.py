@@ -13,7 +13,9 @@ screen.tracer(0)
 
 #moving objects
 player = Player((0,0))
+player.left(90)
 cars = CarManager()
+cars.left(180)
 
 #movement options up/down only
 
