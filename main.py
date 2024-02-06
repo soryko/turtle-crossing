@@ -2,6 +2,7 @@ import time
 from turtle import Screen
 from player import Player
 from car_manager import CarManager
+import random
 #from scoreboard import Scoreboard
 
 #create screen
@@ -14,14 +15,15 @@ screen.tracer(0)
 #moving objects
 player = Player((0,0))
 player.left(90)
-cars = CarManager()
-cars.left(180)
+
 
 #movement options up/down only
 
 screen.listen()
 screen.onkey(player.go_up, "Up")
 screen.onkey(player.go_down, "Down")
+
+num_cars = random.randint(1,5)
 
 
 #refresh screen
@@ -30,7 +32,12 @@ while game_is_on:
     time.sleep(0.1)
     screen.update()
     #generate random cars going right to left
-
+    for cars in range(num_cars):
+        rand_y = random.randint(50,250)
+        cars.reset_position(rand_y)
+        rand_speed = (random.randint(1,3))/2
+        cars = CarManager(rand_speed)
+        cars.left(180)
     #implement collision if statements
 
     #scoreboard
