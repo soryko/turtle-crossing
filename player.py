@@ -9,7 +9,9 @@ class Player(Turtle):
         self.goto(position)
     
     def go_up(self):
-        new_y = self.ycor()
+        new_y = self.ycor() + 10
+        self.goto(0, new_y)
     
     def go_down(self):
-        new_y = self.ycor()
+        new_y = self.ycor() - 10
+        self.goto(0, new_y)

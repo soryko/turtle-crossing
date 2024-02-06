@@ -15,6 +15,12 @@ screen.tracer(0)
 player = Player((0,0))
 cars = CarManager()
 
+#movement options up/down only
+
+screen.listen()
+screen.onkey(player.go_up, "Up")
+screen.onkey(player.go_down, "Down")
+
 
 #refresh screen
 game_is_on = True
