@@ -31,13 +31,15 @@ game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+
     #generate random cars going right to left
     for cars in range(num_cars):
-        rand_y = random.randint(50,250)
-        cars.reset_position(rand_y)
         rand_speed = (random.randint(1,3))/2
         cars = CarManager(rand_speed)
+        rand_y = random.randint(50,250)
+        cars.reset_position(rand_y)
         cars.left(180)
+        cars.move()
     #implement collision if statements
 
     #scoreboard
