@@ -2,28 +2,26 @@ import time
 from turtle import Screen
 from player import Player
 from car_manager import CarManager
-import random
-#from scoreboard import Scoreboard
+
+from scoreboard import Scoreboard
 
 #create screen
 screen = Screen()
-screen.bgcolor('black')
+screen.bgcolor('white')
 screen.setup(width=600, height=600)
 screen.title("Turtle Crossing")
 screen.tracer(0)
 
 #moving objects
-player = Player((0,0))
-player.left(90)
-
-
+player = Player()
+car_manager = CarManager()
+scoreboard = Scoreboard()
 #movement options up/down only
 
 screen.listen()
 screen.onkey(player.go_up, "Up")
 screen.onkey(player.go_down, "Down")
 
-num_cars = random.randint(1,5)
 
 
 #refresh screen
@@ -33,17 +31,17 @@ while game_is_on:
     screen.update()
 
     #generate random cars going right to left
-    for cars in range(num_cars):
-        rand_speed = (random.randint(1,3))/2
-        cars = CarManager(rand_speed)
-        rand_y = random.randint(50,250)
-        cars.reset_position(rand_y)
-        cars.left(180)
-        cars.move()
+    car_manager.create_cars()
+    car_manager.move_cars()
     #implement collision if statements
-
+    for car in car_manager.all_cars:
+        if car.distance(player) < 20:
+            game_is_on = False
+            scoreboard.game_over()
     #scoreboard
-
-
+    if player.is_at_finish_line():
+        player.go_to_start()
+        car_manager.level_up()
+        scoreboard.increase_level()
 
 screen.exitonclick()
